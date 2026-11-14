@@ -1,11 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRyam Live</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CRyam Live · המדפסת</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d2340;--gold:#b8892b}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#2a170b;overflow:hidden;font-family:Heebo,system-ui,sans-serif}
+#wrap{height:100dvh;display:grid;place-items:center}
+#stage{container-type:size;position:relative;overflow:hidden;height:min(100dvh,177.78vw);width:min(100vw,56.25dvh);
+background:repeating-linear-gradient(90deg,transparent 0 22cqw,rgba(0,0,0,.4) 22cqw 22.5cqw),
+repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 .7cqw,rgba(0,0,0,.08) .7cqw 1.4cqw,transparent 1.4cqw 2.6cqw),
+linear-gradient(#8a5a2b,#6a3f1d)}
+body.t #stage{background:none}
+#banner{position:absolute;top:3cqw;inset-inline:4cqw;padding:3cqw;border-radius:5cqw;text-align:center;border:.7cqw solid transparent;
+background:linear-gradient(#1c0f3c,#120a2a) padding-box,linear-gradient(90deg,#ff4fd8,#ffd34f,#4fd3ff) border-box}
+#banner h1{font-size:5.4cqw;font-weight:800;color:#fff}
+.pills{margin:1.2cqw 0}
+.pills span{display:inline-block;margin:.8cqw;padding:1.3cqw 3.4cqw;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:4cqw;font-weight:600}
+#banner p{color:#6fe3ff;font-size:3.8cqw;font-weight:600}
+#scroll{position:absolute;inset-inline:7cqw;top:35cqw;bottom:19cqw;display:flex;flex-direction:column}
+.roll{position:relative;z-index:3;flex:none;height:8cqw;border-radius:4cqw;background:linear-gradient(#fffaf0,#dccfae 60%,#f6efdc);box-shadow:0 1cqw 2cqw rgba(0,0,0,.4)}
+.roll b{position:absolute;top:-3.5cqw;width:2.6cqw;height:15cqw;border-radius:1.3cqw;background:linear-gradient(90deg,#80848c,#f4f6f8 45%,#80848c)}
+.roll b:first-child{left:-5.5cqw}.roll b:last-child{right:-5.5cqw}
+.roll b::after{content:"";position:absolute;top:3.5cqw;left:50%;width:4.4cqw;height:4.4cqw;margin-left:-2.2cqw;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#98a0a8)}
+#paper{flex:1;position:relative;overflow:hidden;margin:0 2.5cqw;
+background:repeating-linear-gradient(#f7f1e3 0 5.4cqw,#e6ddc6 5.4cqw 5.6cqw);box-shadow:inset 0 2cqw 2cqw -1cqw rgba(0,0,0,.3),inset 1.5cqw 0 1.5cqw -1cqw rgba(0,0,0,.18),inset -1.5cqw 0 1.5cqw -1cqw rgba(0,0,0,.18)}
+#empty{position:absolute;inset:0;display:grid;place-items:center;padding:10cqw;text-align:center;color:#8b7d5c;font-size:4.4cqw;font-weight:600}
+#feed{position:absolute;inset-inline:0;bottom:0}
+.item{padding:3.5cqw 4cqw 3cqw}
+.card{position:relative;background:#fffdf6;border:.5cqw solid var(--ink);border-radius:3cqw;padding:3cqw 3cqw 2.6cqw;text-align:center;box-shadow:0 .8cqw 1.6cqw rgba(60,40,10,.18)}
+.card::before{content:"";position:absolute;inset:1cqw;border:.25cqw solid var(--ink);border-radius:2.2cqw;opacity:.5;pointer-events:none}
+.card i{position:absolute;width:2.2cqw;height:2.2cqw;background:var(--gold);transform:rotate(45deg)}
+.card i:nth-of-type(1){top:1.5cqw;left:1.5cqw}.card i:nth-of-type(2){top:1.5cqw;right:1.5cqw}
+.card i:nth-of-type(3){bottom:1.5cqw;left:1.5cqw}.card i:nth-of-type(4){bottom:1.5cqw;right:1.5cqw}
+.hd{font-size:3.3cqw;font-weight:800;color:var(--ink)}
+.av{display:grid;place-items:center;width:35cqw;height:35cqw;margin:2.5cqw auto;border-radius:50%;border:1.1cqw solid #c79a3b;object-fit:cover;color:#fff;font-size:15cqw;font-weight:800;box-shadow:0 0 0 .5cqw #fff8e0,0 1cqw 2cqw rgba(0,0,0,.25)}
+.hn{font-size:6.6cqw;font-weight:800;color:var(--ink);direction:ltr;word-break:break-all}
+.nk{font-size:4cqw;color:#555}
+.pl{display:inline-block;margin:2cqw 0 1.2cqw;padding:1.2cqw 4.2cqw;border-radius:99px;background:#efe3c4;border:.3cqw solid #cdb98a;font-size:4.4cqw;font-weight:700;color:var(--ink)}
+.dt{font-size:2.8cqw;color:#7a6f58}
+.cut{margin-top:3cqw;border-top:.35cqw dashed #cbbd9b}
+#printer{position:absolute;inset-inline:0;bottom:0;height:25cqw;pointer-events:none}
+.rail{position:absolute;inset-inline:3cqw;height:2.2cqw;border-radius:1.1cqw;background:linear-gradient(#f2f4f6,#8b9098 55%,#d5d9de);box-shadow:0 .6cqw 1cqw rgba(0,0,0,.45)}
+.rail::before,.rail::after{content:"";position:absolute;top:-2.5cqw;width:3cqw;height:7cqw;border-radius:1cqw;background:linear-gradient(90deg,#3a3d43,#8c9097 50%,#3a3d43)}
+.rail::before{left:-2cqw}.rail::after{right:-2cqw}
+.r1{top:1cqw}.r2{top:6cqw}
+#head{position:absolute;top:-.5cqw;left:5cqw;width:15cqw;height:12cqw;border-radius:2cqw;background:#1b1f27;border:.5cqw solid #4a505b;display:flex;flex-wrap:wrap;align-content:flex-start;gap:1cqw;padding:2cqw;box-shadow:0 1cqw 2cqw rgba(0,0,0,.5)}
+#head i{width:2.2cqw;height:5cqw;border-radius:.6cqw}
+#head i:nth-child(1){background:#18c8f0}#head i:nth-child(2){background:#f0359b}#head i:nth-child(3){background:#ffd21f}#head i:nth-child(4){background:#222;border:1px solid #555}
+#head em{width:100%;text-align:center;font-style:normal;font-size:2.2cqw;color:#cfd4dc}
+#printer.on #head{animation:sweep 1s ease-in-out infinite alternate}
+@keyframes sweep{to{transform:translateX(70cqw)}}
+.chips{position:absolute;bottom:3.5cqw;inset-inline:0;display:flex;justify-content:center;gap:2cqw}
+.chips span{padding:1.6cqw 3.4cqw;border-radius:99px;background:rgba(10,10,14,.8);color:#fff;font-size:3.4cqw;font-weight:600}
+@media (prefers-reduced-motion:reduce){#printer.on #head{animation:none}}
+</style>
 </head>
 <body>
-    <h1>CRyam Live Bot is Running!</h1>
+<div id="wrap"><main id="stage">
+<header id="banner">
+<h1>🖨️ רוצים שנצייר אתכם?</h1>
+<div class="pills"><span>👍 50 לייקים</span><span>🎁 מתנה</span><span>➕ עוקב חדש</span></div>
+<p>הציור שלך על המדפסת</p>
+</header>
+<section id="scroll">
+<div class="roll"><b></b><b></b></div>
+<div id="paper"><div id="empty">ממתין לעוקב, ללייקים או למתנה הראשונה…</div><div id="feed"></div></div>
+</section>
+<footer id="printer">
+<div class="rail r1"></div><div class="rail r2"></div>
+<div id="head"><i></i><i></i><i></i><i></i><em>CRyam</em></div>
+<div class="chips"><span id="st"></span><span id="now">מוכן להדפסה</span></div>
+</footer>
+</main></div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const $=s=>document.querySelector(s),feed=$('#feed'),printer=$('#printer'),now=$('#now'),P=new URLSearchParams(location.search);
+if(P.get('bg')==='transparent')document.body.classList.add('t');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pill=e=>e.kind==='like'?`❤️ לייקים ${e.count}`:e.kind==='gift'?`🎁 ${esc(e.gift)}${e.count>1?' ×'+e.count:''}`:e.kind==='share'?'🔁 שיתוף':'➕ עוקב חדש';
+const hue=s=>[...s].reduce((a,c)=>a+c.charCodeAt(0),0)%360;
+
+function build(e){
+  const d=new Date(e.ts),date=d.toLocaleDateString('he-IL')+' · '+d.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit',hour12:false});
+  const el=document.createElement('div');el.className='item';
+  el.innerHTML=`<div class="card"><i></i><i></i><i></i><i></i><div class="hd">★ הודפס בלייב · CRyam Live ★</div><span class="slot"></span><div class="hn">@${esc(e.user)}</div>${e.nick?`<div class="nk">${esc(e.nick)}</div>`:''}<div class="pl">${pill(e)}</div><div class="dt">${date}</div></div><div class="cut"></div>`;
+  const fb=()=>{const f=document.createElement('div');f.className='av';f.style.background=`linear-gradient(135deg,hsl(${hue(e.user)} 70% 55%),hsl(${(hue(e.user)+60)%360} 70% 40%))`;f.textContent=[...(e.nick||e.user)][0]?.toUpperCase()||'?';return f};
+  let av;
+  if(e.pic){av=new Image();av.className='av';av.referrerPolicy='no-referrer';av.src=e.pic;av.onerror=()=>{const f=fb();av.replaceWith(f);av=f}}else av=fb();
+  el.querySelector('.slot').replaceWith(av);
+  return el;
+}
+
+const q=[];let busy=false;
+function enqueue(e){if(q.length>25)q.shift();q.push(e);pump()}
+async function pump(){
+  if(busy||!q.length)return;busy=true;
+  const e=q.shift(),dur=q.length>3?1100:3200;
+  $('#empty')?.remove();
+  now.textContent='🖨️ מדפיס את @'+e.user+' 🟢';printer.classList.add('on');
+  const item=build(e);feed.append(item);
+  const h=item.offsetHeight,av=item.querySelector('.av');
+  av.animate([{filter:'grayscale(1) contrast(1.6) blur(6px)',opacity:.35},{filter:'none',opacity:1}],{duration:dur,easing:'ease-in'});
+  await feed.animate([{transform:`translateY(${h}px)`},{transform:'translateY(0)'}],{duration:dur,easing:'steps(40,end)'}).finished;
+  while(feed.children.length>8)feed.firstChild.remove();
+  printer.classList.remove('on');now.textContent='מוכן להדפסה';
+  busy=false;setTimeout(pump,350);
+}
+
+function setStatus(s){
+  $('#st').innerHTML=s.state==='live'?`<span dir="ltr">@${esc(s.user)}</span> ✅ מחובר ללייב 🟢`:s.state==='connecting'?'⏳ מתחבר ללייב…':s.state==='demo'?'🧪 מצב הדגמה':'⚪ ממתין שתפתח לייב';
+}
+
+if(P.has('demo')||typeof io==='undefined'){
+  setStatus({state:'demo'});
+  const N=[['noa.dance','נועה 💃'],['itay_gamer','איתי'],['maya.k','מאיה'],['dan_cooks','דן 🍳'],['lior.live','ליאור']],G=['Rose','Heart','Finger Heart','Galaxy'];
+  const fire=()=>{const [user,nick]=N[Math.random()*N.length|0],k=['follow','like','gift','share'][Math.random()*4|0];
+    enqueue({kind:k,user,nick,pic:'',ts:Date.now(),count:k==='like'?50:1+(Math.random()*3|0),gift:G[Math.random()*G.length|0]})};
+  fire();setInterval(fire,4500);
+}else{
+  const s=io();s.on('status',setStatus);s.on('event',enqueue);
+}
+</script>
 </body>
 </html>
