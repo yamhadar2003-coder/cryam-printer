@@ -10,18 +10,21 @@
 *{box-sizing:border-box;margin:0}
 html,body{height:100%;background:#2a170b;overflow:hidden;font-family:Heebo,system-ui,sans-serif}
 #wrap{height:100dvh;display:grid;place-items:center}
-#stage{container-type:size;position:relative;overflow:hidden;height:min(100dvh,177.78vw);width:min(100vw,56.25dvh);
+#stage{container-type:size;position:relative;overflow:hidden;display:flex;flex-direction:column;height:min(100dvh,177.78vw);width:min(100vw,56.25dvh);
 background:repeating-linear-gradient(90deg,transparent 0 22cqw,rgba(0,0,0,.4) 22cqw 22.5cqw),
 repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 .7cqw,rgba(0,0,0,.08) .7cqw 1.4cqw,transparent 1.4cqw 2.6cqw),
 linear-gradient(#8a5a2b,#6a3f1d)}
 body.t #stage{background:none}
-#banner{position:absolute;top:3cqw;inset-inline:4cqw;padding:3cqw;border-radius:5cqw;text-align:center;border:.7cqw solid transparent;
+body.t #gear{display:none}
+#banner{position:relative;flex:none;margin:3cqw 4cqw 0;padding:3cqw;border-radius:5cqw;text-align:center;border:.7cqw solid transparent;
 background:linear-gradient(#1c0f3c,#120a2a) padding-box,linear-gradient(90deg,#ff4fd8,#ffd34f,#4fd3ff) border-box}
 #banner h1{font-size:5.4cqw;font-weight:800;color:#fff}
-.pills{margin:1.2cqw 0}
-.pills span{display:inline-block;margin:.8cqw;padding:1.3cqw 3.4cqw;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:4cqw;font-weight:600}
-#banner p{color:#6fe3ff;font-size:3.8cqw;font-weight:600}
-#scroll{position:absolute;inset-inline:7cqw;top:35cqw;bottom:19cqw;display:flex;flex-direction:column}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:1.4cqw;margin:1.6cqw 0}
+.pills span{padding:1.1cqw 2.8cqw;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:3.5cqw;font-weight:600;white-space:nowrap}
+.pills span[hidden]{display:none}
+#banner p{color:#6fe3ff;font-size:3.6cqw;font-weight:600}
+#gear{position:absolute;top:2cqw;left:2.4cqw;width:8cqw;height:8cqw;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:4.6cqw;opacity:.75;cursor:pointer}
+#scroll{position:relative;flex:1;min-height:0;margin:4.5cqw 7cqw 19cqw;display:flex;flex-direction:column}
 .roll{position:relative;z-index:3;flex:none;height:8cqw;border-radius:4cqw;background:linear-gradient(#fffaf0,#dccfae 60%,#f6efdc);box-shadow:0 1cqw 2cqw rgba(0,0,0,.4)}
 .roll b{position:absolute;top:-3.5cqw;width:2.6cqw;height:15cqw;border-radius:1.3cqw;background:linear-gradient(90deg,#80848c,#f4f6f8 45%,#80848c)}
 .roll b:first-child{left:-5.5cqw}.roll b:last-child{right:-5.5cqw}
@@ -54,16 +57,29 @@ background:repeating-linear-gradient(#f7f1e3 0 5.4cqw,#e6ddc6 5.4cqw 5.6cqw);box
 #head em{width:100%;text-align:center;font-style:normal;font-size:2.2cqw;color:#cfd4dc}
 #printer.on #head{animation:sweep 1s ease-in-out infinite alternate}
 @keyframes sweep{to{transform:translateX(70cqw)}}
-.chips{position:absolute;bottom:3.5cqw;inset-inline:0;display:flex;justify-content:center;gap:2cqw}
-.chips span{padding:1.6cqw 3.4cqw;border-radius:99px;background:rgba(10,10,14,.8);color:#fff;font-size:3.4cqw;font-weight:600}
+.chips{position:absolute;bottom:3cqw;inset-inline:2cqw;display:flex;flex-wrap:wrap;justify-content:center;gap:1.6cqw}
+.chips span{padding:1.5cqw 3.2cqw;border-radius:99px;background:rgba(10,10,14,.8);color:#fff;font-size:3.3cqw;font-weight:600}
 @media (prefers-reduced-motion:reduce){#printer.on #head{animation:none}}
+#panel{display:none;position:absolute;inset:0;z-index:30;padding:6cqw;overflow:auto;background:rgba(14,8,28,.97);color:#fff}
+#panel.open{display:block}
+#panel h2{font-size:6cqw;font-weight:800;margin-bottom:4cqw}
+#panel label.f{display:block;margin-bottom:3.4cqw;font-size:3.8cqw;font-weight:600;color:#cfc6ee}
+#panel input[type=text],#panel input[type=number],#panel select{display:block;width:100%;margin-top:1.2cqw;padding:2.2cqw 2.6cqw;border-radius:2.2cqw;border:1px solid #5a4a8a;background:#1f1638;color:#fff;font:inherit;font-size:4.4cqw}
+#panel .chk{display:flex;flex-wrap:wrap;gap:2cqw 4cqw;margin:1.4cqw 0 3.4cqw}
+#panel .chk label{display:flex;align-items:center;gap:1.6cqw;font-size:4.2cqw;color:#fff}
+#panel input[type=checkbox]{width:5.4cqw;height:5.4cqw}
+.chip{display:inline-block;margin:1.4cqw 1.4cqw 0 0;padding:1cqw 3cqw;border-radius:99px;background:#2d2150;color:#fff;font-size:3.6cqw;border:1px solid #5a4a8a}
+.btn{font:inherit;font-size:4.2cqw;font-weight:800;padding:2.4cqw 5.4cqw;border:0;border-radius:99px;margin:2cqw 0 0 2cqw;cursor:pointer;background:#3a2d63;color:#fff}
+.btn.pri{background:#f0b429;color:#2b1b00}
+#hint{margin-top:4cqw;font-size:3.3cqw;color:#9a90c4;line-height:1.5}
 </style>
 </head>
 <body>
 <div id="wrap"><main id="stage">
 <header id="banner">
-<h1>🖨️ רוצים שנצייר אתכם?</h1>
-<div class="pills"><span>👍 50 לייקים</span><span>🎁 מתנה</span><span>➕ עוקב חדש</span></div>
+<button id="gear" aria-label="הגדרות">⚙️</button>
+<h1 id="title">🖨️ רוצים שנצייר אתכם?</h1>
+<div class="pills"><span id="pLike">👍 50 לייקים</span><span id="pGift">🎁 מתנה</span><span id="pFollow">➕ עוקב חדש</span><span id="pShare" hidden>🔁 שיתוף</span></div>
 <p>הציור שלך על המדפסת</p>
 </header>
 <section id="scroll">
@@ -75,12 +91,66 @@ background:repeating-linear-gradient(#f7f1e3 0 5.4cqw,#e6ddc6 5.4cqw 5.6cqw);box
 <div id="head"><i></i><i></i><i></i><i></i><em>CRyam</em></div>
 <div class="chips"><span id="st"></span><span id="now">מוכן להדפסה</span></div>
 </footer>
+
+<div id="panel">
+<h2>⚙️ הגדרות</h2>
+<label class="f">שם משתמש בטיקטוק (בלי @)<input type="text" id="fUser" dir="ltr" placeholder="cryam.23" autocapitalize="off" autocomplete="off"></label>
+<label class="f">כותרת עליונה<input type="text" id="fTitle"></label>
+<label class="f">כל כמה לייקים להדפיס כרטיס
+<input type="number" id="fStep" min="1" inputmode="numeric">
+<span><span class="chip" data-step="10">10</span><span class="chip" data-step="50">50</span><span class="chip" data-step="100">100</span><span class="chip" data-step="500">500</span></span></label>
+<div class="f" style="font-size:3.8cqw;font-weight:600;color:#cfc6ee">מה להדפיס</div>
+<div class="chk">
+<label><input type="checkbox" id="kFollow">➕ עוקב</label>
+<label><input type="checkbox" id="kLike">👍 לייקים</label>
+<label><input type="checkbox" id="kGift">🎁 מתנה</label>
+<label><input type="checkbox" id="kShare">🔁 שיתוף</label>
+</div>
+<label class="f">מהירות הדפסה
+<select id="fSpeed"><option value="1.7">איטית</option><option value="1">רגילה</option><option value="0.5">מהירה</option></select></label>
+<button class="btn pri" id="bSave">שמור</button><button class="btn" id="bTest">🧪 כרטיס לבדיקה</button><button class="btn" id="bClose">סגור</button>
+<p id="hint">ההגדרות נשמרות בטלפון הזה. שינוי שם המשתמש מחבר את המדפסת ללייב אחר.</p>
+</div>
 </main></div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script>
 const $=s=>document.querySelector(s),feed=$('#feed'),printer=$('#printer'),now=$('#now'),P=new URLSearchParams(location.search);
 if(P.get('bg')==='transparent')document.body.classList.add('t');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- הגדרות ---------- */
+const KEY='cryam-printer-v1';
+let S={user:'',title:'רוצים שנצייר אתכם?',step:50,speed:1,kinds:{follow:true,like:true,gift:true,share:false}},saved=false;
+try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j){S={...S,...j,kinds:{...S.kinds,...j.kinds}};saved=true}}catch{}
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}};
+let socket=null;
+const sendCfg=()=>socket&&socket.emit('config',{user:S.user,step:S.step});
+
+function paint(){
+  $('#title').textContent='🖨️ '+S.title;
+  $('#pLike').textContent='👍 '+S.step+' לייקים';
+  for(const k of ['follow','like','gift','share'])$('#p'+k[0].toUpperCase()+k.slice(1)).hidden=!S.kinds[k];
+}
+function fill(){
+  $('#fUser').value=S.user;$('#fTitle').value=S.title;$('#fStep').value=S.step;$('#fSpeed').value=String(S.speed);
+  for(const k of ['follow','like','gift','share'])$('#k'+k[0].toUpperCase()+k.slice(1)).checked=!!S.kinds[k];
+}
+$('#gear').onclick=()=>{fill();$('#panel').classList.add('open')};
+$('#bClose').onclick=()=>$('#panel').classList.remove('open');
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{$('#fStep').value=c.dataset.step});
+$('#bSave').onclick=()=>{
+  S.user=$('#fUser').value.trim().replace(/^@/,'');
+  S.title=$('#fTitle').value.trim()||'רוצים שנצייר אתכם?';
+  S.step=Math.max(1,Math.floor(+$('#fStep').value)||50);
+  S.speed=+$('#fSpeed').value||1;
+  for(const k of ['follow','like','gift','share'])S.kinds[k]=$('#k'+k[0].toUpperCase()+k.slice(1)).checked;
+  saved=true;persist();paint();sendCfg();$('#panel').classList.remove('open');
+};
+$('#bTest').onclick=()=>{$('#panel').classList.remove('open');enqueue({kind:'follow',user:S.user||'cryam.23',nick:'כרטיס בדיקה',pic:'',ts:Date.now(),count:1,gift:'Rose'})};
+paint();
+
+/* ---------- כרטיסים ---------- */
 const pill=e=>e.kind==='like'?`❤️ לייקים ${e.count}`:e.kind==='gift'?`🎁 ${esc(e.gift)}${e.count>1?' ×'+e.count:''}`:e.kind==='share'?'🔁 שיתוף':'➕ עוקב חדש';
 const hue=s=>[...s].reduce((a,c)=>a+c.charCodeAt(0),0)%360;
 
@@ -96,10 +166,11 @@ function build(e){
 }
 
 const q=[];let busy=false;
+function onEvent(e){if(S.kinds[e.kind])enqueue(e)}
 function enqueue(e){if(q.length>25)q.shift();q.push(e);pump()}
 async function pump(){
   if(busy||!q.length)return;busy=true;
-  const e=q.shift(),dur=q.length>3?1100:3200;
+  const e=q.shift(),dur=(q.length>3?1100:3200)*S.speed;
   $('#empty')?.remove();
   now.textContent='🖨️ מדפיס את @'+e.user+' 🟢';printer.classList.add('on');
   const item=build(e);feed.append(item);
@@ -112,17 +183,26 @@ async function pump(){
 }
 
 function setStatus(s){
-  $('#st').innerHTML=s.state==='live'?`<span dir="ltr">@${esc(s.user)}</span> ✅ מחובר ללייב 🟢`:s.state==='connecting'?'⏳ מתחבר ללייב…':s.state==='demo'?'🧪 מצב הדגמה':'⚪ ממתין שתפתח לייב';
+  const u=esc(s.user||S.user||'');
+  $('#st').innerHTML=s.state==='live'?`<span dir="ltr">@${u}</span> ✅ מחובר ללייב 🟢`
+    :s.state==='connecting'?'⏳ מתחבר ללייב…'
+    :s.state==='demo'?'🧪 מצב הדגמה'
+    :s.msg&&!/isn.t online/i.test(s.msg)?'⚠️ '+esc(s.msg.slice(0,50))
+    :`⚪ ממתין שתפתח לייב <span dir="ltr">@${u}</span>`;
 }
 
 if(P.has('demo')||typeof io==='undefined'){
   setStatus({state:'demo'});
   const N=[['noa.dance','נועה 💃'],['itay_gamer','איתי'],['maya.k','מאיה'],['dan_cooks','דן 🍳'],['lior.live','ליאור']],G=['Rose','Heart','Finger Heart','Galaxy'];
   const fire=()=>{const [user,nick]=N[Math.random()*N.length|0],k=['follow','like','gift','share'][Math.random()*4|0];
-    enqueue({kind:k,user,nick,pic:'',ts:Date.now(),count:k==='like'?50:1+(Math.random()*3|0),gift:G[Math.random()*G.length|0]})};
+    onEvent({kind:k,user,nick,pic:'',ts:Date.now(),count:k==='like'?S.step:1+(Math.random()*3|0),gift:G[Math.random()*G.length|0]})};
   fire();setInterval(fire,4500);
 }else{
-  const s=io();s.on('status',setStatus);s.on('event',enqueue);
+  socket=io();
+  socket.on('connect',()=>{if(saved)sendCfg()});
+  socket.on('status',setStatus);
+  socket.on('event',onEvent);
+  socket.on('config',c=>{if(!saved){S.user=c.user;S.step=c.step;paint()}});
 }
 </script>
 </body>
